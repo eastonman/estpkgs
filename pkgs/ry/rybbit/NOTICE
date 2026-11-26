@@ -1,0 +1,26 @@
+This store path contains a modified build of Rybbit, prepared by estpkgs
+(https://github.com/eastonman/estpkgs; see that repository's history for the
+exact revision) from upstream v2.9.3
+(commit 908041772bc6cad14916d182e5bd0c8f0b9cbb32).
+
+Modifications, made 2026-11-26 and recorded in that repository:
+
+  • client/src/lib/const.ts                 adds IS_UNLOCKED
+  • client/src/app/[site]/components/Sidebar/Sidebar.tsx
+                                            Pages and Performance gates use it
+  • client/src/components/SiteSettings/TrackingTab.tsx
+                                            Web Vitals toggle gate uses it
+  • client/src/app/layout.tsx               next/font/local instead of Google
+  • client/src/app/[site]/main/components/MainSection/MainSection.tsx
+                                            decorative font stubbed
+  • server/src/index.ts                     listen port from $PORT
+
+Rybbit is licensed AGPL-3.0: the corresponding source is the upstream tag
+above plus that repository. Not affiliated with rybbit-io; no upstream support
+is implied.
+
+Bundles GeoLite2 data created by MaxMind, available from
+https://www.maxmind.com (CC BY-SA 4.0).
+
+Bundles the Inter typeface (SIL Open Font License 1.1), see LICENSE-inter
+next to this file.

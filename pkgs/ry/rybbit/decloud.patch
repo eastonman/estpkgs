@@ -1,0 +1,67 @@
+diff --git a/client/src/app/[site]/components/Sidebar/Sidebar.tsx b/client/src/app/[site]/components/Sidebar/Sidebar.tsx
+index e30fa2e..48a5eff 100644
+--- a/client/src/app/[site]/components/Sidebar/Sidebar.tsx
++++ b/client/src/app/[site]/components/Sidebar/Sidebar.tsx
+@@ -26,7 +26,7 @@ import { useGetSite } from "../../../../api/admin/hooks/useSites";
+ import { Sidebar as SidebarComponents } from "../../../../components/sidebar/Sidebar";
+ import { SiteSettings } from "../../../../components/SiteSettings/SiteSettings";
+ import { useAppEnv } from "../../../../hooks/useIsProduction";
+-import { DEPLOYMENT, IS_CLOUD } from "../../../../lib/const";
++import { DEPLOYMENT, IS_CLOUD, IS_UNLOCKED } from "../../../../lib/const";
+ import { getSiteRouteContext } from "../../../../lib/siteRoute";
+ import { useStripeSubscription } from "../../../../lib/subscription/useStripeSubscription";
+ import { useEmbedPageOptions } from "../../utils";
+@@ -88,7 +88,7 @@ function SidebarContent() {
+           href={getTabPath("globe")}
+           icon={<Globe2 className="w-4 h-4" />}
+         />
+-        {IS_CLOUD && (
++        {IS_UNLOCKED && (
+           <SidebarComponents.Item
+             label={t("Pages")}
+             active={isActiveTab("pages")}
+@@ -96,7 +96,7 @@ function SidebarContent() {
+             icon={<File className="w-4 h-4" />}
+           />
+         )}
+-        {IS_CLOUD && !isMobileSite && (
++        {IS_UNLOCKED && !isMobileSite && (
+           <SidebarComponents.Item
+             label={t("Performance")}
+             active={isActiveTab("performance")}
+diff --git a/client/src/components/SiteSettings/TrackingTab.tsx b/client/src/components/SiteSettings/TrackingTab.tsx
+index b82efd3..6610182 100644
+--- a/client/src/components/SiteSettings/TrackingTab.tsx
++++ b/client/src/components/SiteSettings/TrackingTab.tsx
+@@ -12,7 +12,7 @@ import { useGetSitesFromOrg } from "@/api/admin/hooks/useSites";
+ import { planIncludesReplay } from "@/lib/subscription/planUtils";
+ import { useStripeSubscription } from "@/lib/subscription/useStripeSubscription";
+ import { Badge } from "@/components/ui/badge";
+-import { IS_CLOUD } from "@/lib/const";
++import { IS_CLOUD, IS_UNLOCKED } from "@/lib/const";
+ 
+ import { SettingRow, SettingsSection, SettingsSections } from "./SettingsSection";
+ 
+@@ -127,7 +127,7 @@ export function TrackingTab({
+           } as ToggleConfig,
+         ]
+       : []),
+-    ...(IS_CLOUD && !isMobileSite
++    ...(IS_UNLOCKED && !isMobileSite
+       ? [
+           {
+             id: "webVitals",
+diff --git a/client/src/lib/const.ts b/client/src/lib/const.ts
+index be835a7..20355f7 100644
+--- a/client/src/lib/const.ts
++++ b/client/src/lib/const.ts
+@@ -6,6 +6,9 @@ export const STRIPE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE
+ 
+ 
+ export const IS_CLOUD = process.env.NEXT_PUBLIC_CLOUD === "true";
++// Self-hosted builds: expose the same analytics surface as cloud (pages,
++// performance, web vitals) without the billing/subscription code paths.
++export const IS_UNLOCKED = true;
+ export const DEPLOYMENT = process.env.NEXT_PUBLIC_DEPLOYMENT;
+ export const LITE_DASHBOARD = process.env.NEXT_PUBLIC_LITE_DASHBOARD === "true";
+ 

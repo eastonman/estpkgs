@@ -1,0 +1,5 @@
+/result
+/result-*
+/.ref/
+/.direnv/
+*.log

@@ -1,0 +1,28 @@
+estpkgs -- https://github.com/eastonman/estpkgs
+
+Packaging and the flake are MIT (see LICENSE). One exception: a patch against a
+copyleft program is a derivative of that program and carries its licence, not
+this repository's.
+
+  pkgs/ry/rybbit/package.nix
+    Derived from 74k1/tixpkgs (MIT), https://github.com/74k1/tixpkgs
+    Copyright (c) 2025 Tim (74k1) and contributors
+
+  pkgs/ry/rybbit/decloud.patch
+    A derivative of Rybbit (AGPL-3.0), not MIT. See below.
+
+  pkgs/ry/rybbit -- Rybbit
+    https://github.com/rybbit-io/rybbit -- AGPL-3.0
+    Builds produced by this repository are modified versions of Rybbit; the
+    modifications are listed in pkgs/ry/rybbit/NOTICE, which is installed with
+    the artifact. Corresponding source: the pinned upstream tag plus this
+    repository.
+
+  GeoLite2 databases shipped with Rybbit
+    Bundles GeoLite2 data created by MaxMind, available from
+    https://www.maxmind.com (CC BY-SA 4.0). Upstream vendors both .mmdb files
+    in its own tree, so they are as current as the pinned tag.
+
+  Inter typeface (shipped with the client)
+    SIL Open Font License 1.1, https://rsms.me/inter/ -- see
+    pkgs/ry/rybbit/LICENSE-inter, installed next to the artifact's NOTICE.
